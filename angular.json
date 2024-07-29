@@ -64,7 +64,7 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
             }
           },
           "defaultConfiguration": "production"
@@ -76,7 +76,8 @@
               "buildTarget": "clean-architecture-angular:build:production"
             },
             "development": {
-              "buildTarget": "clean-architecture-angular:build:development"
+              "buildTarget": "clean-architecture-angular:build:development",
+              "disableHostCheck": true
             }
           },
           "defaultConfiguration": "development"
@@ -97,5 +98,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "30faf4be-cf9f-459c-be24-316601932be5"
   }
 }

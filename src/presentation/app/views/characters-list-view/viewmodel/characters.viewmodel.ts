@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GetHasNextAndCharactersUseCase } from '@usecases/characters/get-hasnext-and-characters.usecase';
 import { CharactersEntity } from '@models/characters/characters-entity.model';
 import { BehaviorSubject } from 'rxjs';
+import { GetBucketUseCase } from '@usecases/bucket/get-bucket.usecase';
 
 @Injectable()
 export class CharactersViewModel {
@@ -9,13 +10,15 @@ export class CharactersViewModel {
     {} as CharactersEntity
   );
   constructor(
-    private getHasNextAndCharactersUseCase: GetHasNextAndCharactersUseCase
+    private getHasNextAndCharactersUseCase: GetHasNextAndCharactersUseCase,
+    private getBucketUseCase: GetBucketUseCase
   ) {
     this.initViewModel();
   }
 
   initViewModel() {
     this.getCharacters(1);
+    this.getBucket();
   }
 
   public loadMoreCharacters(): void {
@@ -40,5 +43,11 @@ export class CharactersViewModel {
   private getPageNumberFromUrl(url: string): number {
     const match = url.match(/page=(\d+)/);
     return match ? +match[1] : 1;
+  }
+
+  private getBucket(){
+    this.getBucketUseCase.execute("").subscribe(value => {
+      console.log(value)
+    })
   }
 }
