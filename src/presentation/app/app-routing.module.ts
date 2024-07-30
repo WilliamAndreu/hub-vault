@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
+  { path: '**', redirectTo: 'main' },
   {
-    path: '',
+    path: 'main',
     loadChildren: () =>
-      import('./views/characters-list-view/characters-list-view.module').then(
-        (m) => m.CharactersModule
-      ),
-    pathMatch: 'full',
+      import('./containers/main-container/main-container.module').then(
+        (m) => m.MainContainerModule
+      )
   },
 ];
 

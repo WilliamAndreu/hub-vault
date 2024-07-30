@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 
-        html, body{
-          background-color: #111828
-        }
+
+
+html, body { height: 100%;    background-color: #ffffff;
+
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  
+}
+
+mat-icon{
+  color: black !important;
+}
+
+mat-drawer {
+
+  overscroll-behavior: none !important;
+  .mat-drawer-inner-container {
+      
+  overscroll-behavior: none !important;
+  }
+}

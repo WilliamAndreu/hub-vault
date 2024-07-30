@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {CharactersListViewComponent} from "./view/characters-list-view.component";
+import { HomeComponent } from './view/home.component';
+
 
 const routes: Routes = [
     {
         path: '',
-        component: CharactersListViewComponent
+        component: HomeComponent
     }
 ];
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class CharactersListViewRoutingModule { }
+export class HomeViewRoutingModule { }
