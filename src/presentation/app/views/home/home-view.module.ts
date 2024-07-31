@@ -8,6 +8,24 @@ import { HomeViewRoutingModule } from './home-view-routing.module';
 import { HomeViewModel } from './viewmodel/home.viewmodel';
 
 
+
+
+
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {DatePipe} from '@angular/common';
+import {MatListModule} from '@angular/material/list';
+import {MatRippleModule} from '@angular/material/core';
+
+
+
+
+import {BehaviorSubject, merge, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTreeModule} from '@angular/material/tree';
+
 @NgModule({
   declarations: [HomeComponent],
   imports: [
@@ -15,7 +33,17 @@ import { HomeViewModel } from './viewmodel/home.viewmodel';
     CommonModule,
     DataModule,
     FormsModule,
-    PipesModule
+    PipesModule,
+
+    MatDividerModule,
+    MatIconModule,
+    DatePipe,
+    MatListModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    MatTreeModule,
+    MatRippleModule
+
     
   ],
   providers: [HomeViewModel],

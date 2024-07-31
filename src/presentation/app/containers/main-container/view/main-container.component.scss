@@ -34,15 +34,15 @@
 
 mat-sidenav {
   width: 200px;
-  background: #FFFFFF;
+
   border-right:0px;
   
 }
-mat-toolbar {  background: #FFFFFF; }
+mat-toolbar { } 
 
 .page-container {
   margin-top: 64px;
   height: calc(100vh - 64px) !important;
   overflow: scroll;
-  background: #FAFBFC;
+  
 }
