@@ -2,14 +2,26 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
     <mat-sidenav-container class="example-sidenav-container"
                            [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
-        <mat-sidenav [opened]="mobileQuery.matches ? 'false' : 'false'" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" class="!bg-secondary">
+        <mat-sidenav [opened]="mobileQuery.matches ? 'false' : 'false'" #snav 
+        [mode]="mobileQuery.matches ? 'over' : 'side'" class="!bg-secondary">
             <mat-nav-list >
-                <a class="!text-white" mat-list-item routerLink="."><span class="text-white">Angular</span></a>
-                <a mat-list-item routerLink="."><span class="text-white">Flutter</span></a>
-                <a mat-list-item routerLink="."><span class="text-white">Ionic</span></a>
-                <a mat-list-item routerLink="."><span class="text-white">Android</span></a>
-                <a mat-list-item routerLink="."><span class="text-white">iOS</span></a>
-                <a mat-list-item routerLink="."><span class="text-white">Php</span></a>
+                <div matRipple  class=" border-l-4 border-purpleLight !text-white w-full h-12  inline-flex justify-start items-center p-3 cursor-pointer" mat-list-item routerLink=".">
+                    <img class="h-7 w-7 select-none	" src="assets/angular.webp"/>
+                <span class="text-purpleLight ml-3 select-none	text-base/6">
+                    Angular
+                </span>
+            </div>
+
+            <div matRipple  class=" cursor-pointer  !text-white w-full h-12  
+            inline-flex justify-start items-center p-3" 
+            mat-list-item routerLink=".">
+                <img class="h-6 w-5 select-none	" src="assets/flutter.webp"/>
+            <span class="text-white ml-3 select-none	text-base/6">
+                Flutter
+
+            </span>
+        </div>
+               
             </mat-nav-list>
         </mat-sidenav>
 
@@ -21,7 +33,7 @@
                 </button>
                 <h1 class="example-app-name">Hub Vault</h1>
             </mat-toolbar>
-            <section class="page-container p-5">
+            <section class="page-container p-5 bg-primary">
               <router-outlet/>
             </section>
         </mat-sidenav-content>

@@ -22,6 +22,8 @@ export interface Section {
 
 export class HomeComponent {
 
+  gitHubUrl = 'https://github.com/hub-vault';
+
   folders: Section[] = [
     {
       name: 'Photos',

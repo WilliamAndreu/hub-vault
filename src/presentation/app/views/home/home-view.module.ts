@@ -16,15 +16,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {DatePipe} from '@angular/common';
 import {MatListModule} from '@angular/material/list';
 import {MatRippleModule} from '@angular/material/core';
-
-
-
-
-import {BehaviorSubject, merge, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTreeModule} from '@angular/material/tree';
+import { ClipBoardComponent } from '../../shared-components/clip-board-component/clip-board.component';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -34,7 +29,6 @@ import {MatTreeModule} from '@angular/material/tree';
     DataModule,
     FormsModule,
     PipesModule,
-
     MatDividerModule,
     MatIconModule,
     DatePipe,
@@ -42,10 +36,9 @@ import {MatTreeModule} from '@angular/material/tree';
     MatProgressBarModule,
     MatButtonModule,
     MatTreeModule,
-    MatRippleModule
-
-    
-  ],
+    MatRippleModule,
+    ClipBoardComponent
+],
   providers: [HomeViewModel],
 })
 export class HomeModule {}
