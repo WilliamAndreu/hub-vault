@@ -6,11 +6,6 @@ import { PipesModule } from '@pipes/pipes.module';
 import { HomeComponent } from './view/home.component';
 import { HomeViewRoutingModule } from './home-view-routing.module';
 import { HomeViewModel } from './viewmodel/home.viewmodel';
-
-
-
-
-
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {DatePipe} from '@angular/common';
@@ -20,6 +15,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTreeModule} from '@angular/material/tree';
 import { ClipBoardComponent } from '../../shared-components/clip-board-component/clip-board.component';
+import { BreadCrumbComponent } from "../../shared-components/breadCrumb/breadCrumb.component";
 
 @NgModule({
   declarations: [HomeComponent],
@@ -37,7 +33,8 @@ import { ClipBoardComponent } from '../../shared-components/clip-board-component
     MatButtonModule,
     MatTreeModule,
     MatRippleModule,
-    ClipBoardComponent
+    ClipBoardComponent,
+    BreadCrumbComponent
 ],
   providers: [HomeViewModel],
 })

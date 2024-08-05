@@ -49,7 +49,7 @@ export class HomeComponent {
     },
   ];
  
-  constructor(private viewModel: HomeViewModel) { 
+  constructor(public viewModel: HomeViewModel) { 
   
   }
 
