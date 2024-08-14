@@ -11,6 +11,8 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import { MatSidenavModule} from "@angular/material/sidenav";
 import {MatRippleModule} from '@angular/material/core';
+import { LocalStorageService } from 'src/core/services/local-storage.service';
+import { MainContainerViewModel } from './viewmodel/main-container.viewmodel';
 
 
 
@@ -29,7 +31,11 @@ import {MatRippleModule} from '@angular/material/core';
     MatListItem,
     MatIcon,
     MatSidenavModule,
-    MatRippleModule
+    MatRippleModule,
+  
+  ], 
+  providers: [
+    MainContainerViewModel
   ]
 })
 export class MainContainerModule {}

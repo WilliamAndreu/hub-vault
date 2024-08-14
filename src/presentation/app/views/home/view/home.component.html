@@ -2,22 +2,50 @@
 <app-bread-crumb></app-bread-crumb>
 
 <div class="bg-secondary rounded-lg mt-5 px-2 pb-4 text-white flex flex-col">
+  @if(viewModel.bucketData())  {
   <div mat-subheader>{{viewModel.bucketData()?.name ?? '' | formatGitHubRepoName}}</div>
   <span class="pl-4 mb-2">{{viewModel.bucketData()?.description}}</span>
-  <app-clip-board [url]="viewModel.bucketData()?.url ?? ''"></app-clip-board>
+  <app-clip-board [url]="viewModel.bucketData()?.html_url ?? ''"></app-clip-board>
+  }
 </div>
 
-<div class="bg-secondary rounded-lg mt-5 px-2">
-  <mat-list class="!text-white">
-    <div mat-subheader>Folders</div>
-    @for (folder of folders; track folder) {
-      <mat-list-item matRipple class="!rounded-lg">
-        <mat-icon matListItemIcon class="select-none !text-white">folder</mat-icon>
-        <div matListItemTitle class="select-none !text-white">{{folder.name}}</div>
-        <div matListItemLine class="select-none !text-white">{{folder.updated | date}}</div>
-      </mat-list-item>
-    }
-  </mat-list>
+<div [ngClass]="{'bg-secondary' : this.dropZoneDetector() == false,'bg-greenLight' : this.dropZoneDetector() == false }"
+class=" rounded-lg mt-5 px-2 ">
+  @if(!viewModel.error()){
+    <ngx-dropzone (dragover)="onDragEnter($event)"  (dragleave)="onDragLeave($event)">
+    <input type="file" fileInput  [formControl]="profileImg" />
+
+    <mat-list class="!text-white  !pointer-events-none">
+      <div mat-subheader class=" !pointer-events-none">Folders</div>
+      @for (content of viewModel.contentData(); track content) {
+        
+        <mat-list-item  disableRipple="true" matRipple 
+        [ngClass]="{' [&>*]:!pointer-events-none' : this.dropZoneDetector() == true}"
+        class="!rounded-lg" (click)="selectContent(content)">
+          <mat-icon matListItemIcon class="select-none !text-white">{{content.type | fileIcon}}</mat-icon>
+          <div matListItemTitle disableRipple="true" class="select-none !text-white">{{content.name}}</div>
+          @if (content.type !== 'dir'){
+            <div matListItemLine class="select-none !text-white">{{content.size | fileSize}}</div>
+          }
+        </mat-list-item>
+      }
+    </mat-list>
+  </ngx-dropzone>
+   
+  } 
+  @else {
+    <div class="flex flex-col justify-center items-center p-6">
+      <img src="assets/generic_error.webp" class="size-64">
+      <div mat-subheader class="text-white">{{viewModel.error()}}</div>
+
+
+
+
+     
+    </div>
+  }
+  
+
 </div>
 
 

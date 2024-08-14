@@ -5,22 +5,17 @@
         <mat-sidenav [opened]="mobileQuery.matches ? 'false' : 'false'" #snav 
         [mode]="mobileQuery.matches ? 'over' : 'side'" class="!bg-secondary">
             <mat-nav-list >
-                <div matRipple  class=" border-l-4 border-purpleLight !text-white w-full h-12  inline-flex justify-start items-center p-3 cursor-pointer" mat-list-item routerLink=".">
-                    <img class="h-7 w-7 select-none	" src="assets/angular.webp"/>
-                <span class="text-purpleLight ml-3 select-none	text-base/6">
-                    Angular
-                </span>
-            </div>
 
-            <div matRipple  class=" cursor-pointer  !text-white w-full h-12  
-            inline-flex justify-start items-center p-3" 
-            mat-list-item routerLink=".">
-                <img class="h-6 w-5 select-none	" src="assets/flutter.webp"/>
-            <span class="text-white ml-3 select-none	text-base/6">
-                Flutter
-
-            </span>
-        </div>
+                @for (directory of viewModel.mainDirectoriesList; track viewModel.mainDirectoriesList) {
+                    <div matRipple  class=" border-l-4 border-purpleLight !text-white w-full h-12  inline-flex justify-start items-center p-3 cursor-pointer" mat-list-item 
+                    (click)="selectTech(directory)"  
+                    [ngClass]="{'border-l-4 border-purpleLight': isDirectorySelected(directory.directoryName)}">
+                        <img class="h-7 w-6 select-none	" [src]="directory.icon"/>
+                        <span class="text-purpleLight ml-3 select-none	text-base/6">
+                            {{directory.directoryName}}
+                        </span>
+                    </div>
+                }
                
             </mat-nav-list>
         </mat-sidenav>

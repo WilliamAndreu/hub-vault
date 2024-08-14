@@ -11,6 +11,14 @@ import {BucketLocalDataSourceImp} from "@data/datasource/bucket/local/bucket-loc
 import {BucketLocalDataSource} from "@data/datasource/bucket/source/bucket-local-datasource";
 
 
+import {GetContentUseCase} from "@usecases/content/get-content.usecase";
+import {ContentRepository} from "@repositories/content/content.repository";
+import {ContentRemoteDataSource} from "@data/datasource/content/source/content-remote-datasource";
+import {ContentImpRepository} from "@data/repositories/content/content-implementation.repository";
+import {ContentRemoteDataSourceImp} from "@data/datasource/content/remote/content-remote-datasource-imp";
+import {ContentLocalDataSourceImp} from "@data/datasource/content/local/content-local-datasource-imp";
+import {ContentLocalDataSource} from "@data/datasource/content/source/content-local-datasource";
+
 @NgModule({
   providers: [
     Request,
@@ -20,6 +28,11 @@ import {BucketLocalDataSource} from "@data/datasource/bucket/source/bucket-local
     { provide: BucketRepository, useClass: BucketImpRepository },
     { provide: BucketRemoteDataSource, useClass: BucketRemoteDataSourceImp },
     { provide: BucketLocalDataSource, useClass: BucketLocalDataSourceImp },
+
+    GetContentUseCase,
+    { provide: ContentRepository, useClass: ContentImpRepository },
+    { provide: ContentRemoteDataSource, useClass: ContentRemoteDataSourceImp },
+    { provide: ContentLocalDataSource, useClass: ContentLocalDataSourceImp },
   ],
   imports: [CommonModule, HttpClientModule],
 })

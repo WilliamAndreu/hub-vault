@@ -4,7 +4,23 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "https://rickandmortyapi.com/api/"
+  apiBaseUrl: "https://api.github.com/repos/WilliamAndreu/hybrid-storage",
+//  apiBaseUrl: "https://api.github.com/repos/rudoapps/hybrid-storage",
+
+  mainDirectories: [
+
+    {
+      directoryName: "Angular",
+      directoryPath: "angular",
+      icon: "assets/angular.webp"
+    },
+    
+    {
+      directoryName: "Flutter",
+      directoryPath: "flutter",
+      icon: "assets/flutter.webp"
+    }
+  ]
 
 };
 

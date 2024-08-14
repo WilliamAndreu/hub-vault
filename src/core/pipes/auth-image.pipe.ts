@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Pipe({
     name: 'secureImg'

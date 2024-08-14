@@ -1,5 +1,8 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, signal } from '@angular/core';
 import { HomeViewModel } from '../viewmodel/home.viewmodel';
+import { ContentEntity } from '@models/content/content-entity';
+import { FormControl } from '@angular/forms';
+import { FileInputValidators, FileInputValue } from '@ngx-dropzone/cdk';
 
 
 
@@ -10,9 +13,6 @@ export interface Section {
   updated: Date;
 }
 
-
-
-
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -22,38 +22,44 @@ export interface Section {
 
 export class HomeComponent {
 
-  gitHubUrl = 'https://github.com/hub-vault';
-
-  folders: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    },
-  ];
-  notes: Section[] = [
-    {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
-    },
-  ];
- 
+  validators = [FileInputValidators.accept("image/*")];
+  profileImg = new FormControl<FileInputValue>(null, this.validators);
+  dropZoneDetector = signal(false)
   constructor(public viewModel: HomeViewModel) { 
-  
+    this.initDropFileObserver();
   }
 
+  
+  public selectContent(content: ContentEntity) {
+    if(content.type === 'dir'){
+      this.viewModel.addRouteToGithubRouter(content.url);
+    }else { 
+      console.log(content)
+      this.viewModel.downloadFile(content!.download_url! , content.name);
+    }
+    
+  }
 
+  
+
+  private initDropFileObserver(){
+    this.profileImg.valueChanges.subscribe(value => {
+      console.log('name has changed:', value)
+      this.dropZoneDetector.set(false)
+      });
+  }
+
+  onDragEnter(event:any){
+   if(this.dropZoneDetector() == false){
+    this.dropZoneDetector.set(true)
+   }
+  }
+
+onDragLeave(event: DragEvent) {
+  if(this.dropZoneDetector() == true){
+    this.dropZoneDetector.set(false)
+   }
+}
 
 
 }
