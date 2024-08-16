@@ -51,7 +51,7 @@ export class HomeViewModel {
     this.getBucketUseCase.execute("").pipe(
       catchError(err => {
         this.handleError('Failed to load bucket data', err);
-        return of(undefined); // Return a default value or empty observable
+        return of(undefined); 
       })
     ).subscribe({
       next: (bucket) => {
@@ -75,7 +75,7 @@ export class HomeViewModel {
     this.getContentUseCase.execute(directoryPath).pipe(
       catchError(err => {
         this.handleError('Failed to load content data', err);
-        return of([]); // Return a default value or empty observable
+        return of([]);
       })
     ).subscribe({
       next: (content) => {

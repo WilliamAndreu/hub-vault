@@ -1,37 +1,47 @@
-
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-    <mat-sidenav-container class="example-sidenav-container"
-                           [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
-        <mat-sidenav [opened]="mobileQuery.matches ? 'false' : 'false'" #snav 
-        [mode]="mobileQuery.matches ? 'over' : 'side'" class="!bg-secondary">
-            <mat-nav-list >
+  <mat-sidenav-container
+    class="example-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 0 : 0"
+  >
+    <mat-sidenav
+      [opened]="mobileQuery.matches ? 'false' : 'false'"
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      class="!bg-secondary"
+    >
+      <mat-nav-list>
+        @for (directory of viewModel.mainDirectoriesList; track
+        viewModel.mainDirectoriesList) {
+        <div
+          matRipple
+          class="border-l-4 border-purpleLight !text-white w-full h-12 inline-flex justify-start items-center p-3 cursor-pointer"
+          mat-list-item
+          (click)="selectTech(directory)"
+          [ngClass]="{
+            'border-l-4 border-purpleLight': isDirectorySelected(
+              directory.directoryName
+            )
+          }"
+        >
+          <img class="h-7 w-6 select-none" [src]="directory.icon" />
+          <span class="text-purpleLight ml-3 select-none text-base/6">
+            {{ directory.directoryName }}
+          </span>
+        </div>
+        }
+      </mat-nav-list>
+    </mat-sidenav>
 
-                @for (directory of viewModel.mainDirectoriesList; track viewModel.mainDirectoriesList) {
-                    <div matRipple  class=" border-l-4 border-purpleLight !text-white w-full h-12  inline-flex justify-start items-center p-3 cursor-pointer" mat-list-item 
-                    (click)="selectTech(directory)"  
-                    [ngClass]="{'border-l-4 border-purpleLight': isDirectorySelected(directory.directoryName)}">
-                        <img class="h-7 w-6 select-none	" [src]="directory.icon"/>
-                        <span class="text-purpleLight ml-3 select-none	text-base/6">
-                            {{directory.directoryName}}
-                        </span>
-                    </div>
-                }
-               
-            </mat-nav-list>
-        </mat-sidenav>
-
-        <mat-sidenav-content>
-
-            <mat-toolbar color="primary" class="example-toolbar !bg-secondary">
-                <button mat-icon-button (click)="snav.toggle()">
-                    <mat-icon class="!text-white">menu</mat-icon>
-                </button>
-                <h1 class="example-app-name">Hub Vault</h1>
-            </mat-toolbar>
-            <section class="page-container p-5 bg-primary">
-              <router-outlet/>
-            </section>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary" class="example-toolbar !bg-secondary">
+        <button mat-icon-button (click)="snav.toggle()">
+          <mat-icon class="!text-white">menu</mat-icon>
+        </button>
+        <h1 class="example-app-name">Hub Vault</h1>
+      </mat-toolbar>
+      <section class="page-container p-5 bg-primary">
+        <router-outlet />
+      </section>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
-

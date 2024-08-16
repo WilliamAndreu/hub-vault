@@ -1,51 +1,59 @@
-
 <app-bread-crumb></app-bread-crumb>
 
 <div class="bg-secondary rounded-lg mt-5 px-2 pb-4 text-white flex flex-col">
-  @if(viewModel.bucketData())  {
-  <div mat-subheader>{{viewModel.bucketData()?.name ?? '' | formatGitHubRepoName}}</div>
-  <span class="pl-4 mb-2">{{viewModel.bucketData()?.description}}</span>
+  @if(viewModel.bucketData()) {
+  <div mat-subheader>
+    {{ viewModel.bucketData()?.name ?? "" | formatGitHubRepoName }}
+  </div>
+  <span class="pl-4 mb-2">{{ viewModel.bucketData()?.description }}</span>
   <app-clip-board [url]="viewModel.bucketData()?.html_url ?? ''"></app-clip-board>
   }
 </div>
 
-<div [ngClass]="{'bg-secondary' : this.dropZoneDetector() == false,'bg-greenLight' : this.dropZoneDetector() == false }"
-class=" rounded-lg mt-5 px-2 ">
+<div
+  [ngClass]="{
+    'bg-secondary': this.dropZoneDetector() == false,
+    'bg-purpleDark': this.dropZoneDetector() == true,
+    'border-dashed': this.dropZoneDetector() == true,
+    '!border-purpleLight': this.dropZoneDetector() == true
+  }"
+  class="rounded-lg mt-5 px-2 border-2 border-secondary"
+>
   @if(!viewModel.error()){
-    <ngx-dropzone (dragover)="onDragEnter($event)"  (dragleave)="onDragLeave($event)">
-    <input type="file" fileInput  [formControl]="profileImg" />
+  <ngx-dropzone (dragover)="onDragEnter($event)" (dragleave)="onDragLeave($event)">
+    <input type="file" fileInput [formControl]="profileImg" />
 
-    <mat-list class="!text-white  !pointer-events-none">
-      <div mat-subheader class=" !pointer-events-none">Folders</div>
+    <mat-list class="!text-white !pointer-events-none">
+      <div mat-subheader class="!pointer-events-none">Folders</div>
       @for (content of viewModel.contentData(); track content) {
-        
-        <mat-list-item  disableRipple="true" matRipple 
-        [ngClass]="{' [&>*]:!pointer-events-none' : this.dropZoneDetector() == true}"
-        class="!rounded-lg" (click)="selectContent(content)">
-          <mat-icon matListItemIcon class="select-none !text-white">{{content.type | fileIcon}}</mat-icon>
-          <div matListItemTitle disableRipple="true" class="select-none !text-white">{{content.name}}</div>
-          @if (content.type !== 'dir'){
-            <div matListItemLine class="select-none !text-white">{{content.size | fileSize}}</div>
-          }
-        </mat-list-item>
+
+      <mat-list-item
+        disableRipple="true"
+        matRipple
+        [ngClass]="{
+          '[&>*]:!pointer-events-none': this.dropZoneDetector() == true
+        }"
+        class="!rounded-lg"
+        (click)="selectContent(content)"
+      >
+        <mat-icon matListItemIcon class="select-none !text-white">{{ content.type | fileIcon }}</mat-icon>
+        <div matListItemTitle disableRipple="true" class="select-none !text-white">
+          {{ content.name }}
+        </div>
+        @if (content.type !== 'dir'){
+        <div matListItemLine class="select-none !text-white  [&>*]:!pointer-events-none">
+          {{ content.size | fileSize }}
+        </div>
+        }
+      </mat-list-item>
       }
     </mat-list>
   </ngx-dropzone>
-   
-  } 
-  @else {
-    <div class="flex flex-col justify-center items-center p-6">
-      <img src="assets/generic_error.webp" class="size-64">
-      <div mat-subheader class="text-white">{{viewModel.error()}}</div>
 
-
-
-
-     
-    </div>
+  } @else {
+  <div class="flex flex-col justify-center items-center p-6">
+    <img src="assets/generic_error.webp" class="size-64" />
+    <div mat-subheader class="text-white">{{ viewModel.error() }}</div>
+  </div>
   }
-  
-
 </div>
-
-

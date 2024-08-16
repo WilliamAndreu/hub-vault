@@ -23,7 +23,6 @@
   z-index: 2;
 }
 
-
 .example-sidenav-container {
   flex: 1;
 }
@@ -35,22 +34,19 @@
 mat-sidenav {
   width: 200px;
 
-  border-right:0px;
-  
+  border-right: 0px;
 }
 mat-toolbar {
   max-height: 64px !important;
- } 
+}
 
 .page-container {
   margin-top: 64px;
   height: calc(100vh - 64px) !important;
   overflow: hidden;
-  
 }
 
-
-.mat-drawer-container{
+.mat-drawer-container {
   background-color: #26272b !important;
   color: #26272b !important;
 }
