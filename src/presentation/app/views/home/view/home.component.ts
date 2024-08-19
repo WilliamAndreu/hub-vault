@@ -28,6 +28,7 @@ export class HomeComponent {
   constructor(public viewModel: HomeViewModel) {
     this.initDropFileObserver();
     console.log("Env is " + environment.production)
+    console.log("Bearer " + environment.gitHubToken)
   }
 
   public selectContent(content: ContentEntity) {
