@@ -9,6 +9,7 @@
     "test": "jest --runInBand --setupFilesAfterEnv ./setup-jest.ts",
     "test:watch": "jest --runInBand --setupFilesAfterEnv ./setup-jest.ts --watch",
     "test:coverage": "jest --runInBand --setupFilesAfterEnv ./setup-jest.ts --coverage",
+    "config": "node scripts/process-env/proces-env.js",
     "domain": " node scripts/generate-domain/index.js"
   },
   "private": true,
