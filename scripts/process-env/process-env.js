@@ -12,7 +12,7 @@ const setEnv = () => {
   // `environment.ts` file structure
     const envConfigFile = `export const environment = {
     production: true,
-    apiBaseUrl: '${process.env.GBT_TOKEN}',
+    apiBaseUrl: '${process.env.API_BASE_URL}',
     cryptoKey: '${process.env.CRYPTO_KEY}',
     gitHubToken: '${process.env.GBT_TOKEN}',
     mainDirectories: [
