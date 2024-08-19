@@ -2,9 +2,6 @@ const setEnv = () => {
     const fs = require('fs');
     const writeFile = fs.writeFile;
     const targetPath = './src/core/environments/environment.prod.ts';
-    require('dotenv').config({
-      path: 'src/environments/.env'
-    });
     const envConfigFile = `export const environment = {
     production: true,
     apiBaseUrl: '${process.env.API_BASE_URL}',
