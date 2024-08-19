@@ -4,6 +4,7 @@ import { ContentEntity } from "@models/content/content.entity";
 import { FormControl } from "@angular/forms";
 import { FileInputValidators, FileInputValue } from "@ngx-dropzone/cdk";
 import { MatMenuTrigger } from "@angular/material/menu";
+import { environment } from "@environments/environment";
 
 export interface Section {
   name: string;
@@ -26,6 +27,7 @@ export class HomeComponent {
 
   constructor(public viewModel: HomeViewModel) {
     this.initDropFileObserver();
+    console.log("Env is " + environment.production)
   }
 
   public selectContent(content: ContentEntity) {
