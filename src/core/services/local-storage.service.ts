@@ -36,11 +36,11 @@ export class LocalStorageService {
   }
 
   private encrypt(value: string): string {
-    return CryptoJS.AES.encrypt(value, this.cryptoKey).toString();
+    return CryptoJS.AES.encrypt(value, this.cryptoKey!).toString();
   }
 
   private decrypt(value: string): string {
-    const bytes = CryptoJS.AES.decrypt(value, this.cryptoKey);
+    const bytes = CryptoJS.AES.decrypt(value, this.cryptoKey!);
     return bytes.toString(CryptoJS.enc.Utf8);
   }
 }
