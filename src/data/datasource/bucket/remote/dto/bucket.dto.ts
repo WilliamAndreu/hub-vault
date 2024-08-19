@@ -82,7 +82,7 @@ export interface BucketDTO {
   default_branch: string
   temp_clone_token: any
   custom_properties: CustomPropertiesDTO
-  organization: OrganizationDTO
+  organization?: OrganizationDTO
   network_count: number
   subscribers_count: number
 }

@@ -36,7 +36,7 @@ export class BucketDtoRepositoryMapper extends Mapper<BucketEntity,BucketDTO> {
       size: param.size,
       forks_count: param.forks_count,
       open_issues_count: param.open_issues_count,
-      organization: {
+      organization: param.organization ? {
         login: param.organization.login,
         id: param.organization.id,
         node_id: param.organization.node_id,
@@ -55,7 +55,7 @@ export class BucketDtoRepositoryMapper extends Mapper<BucketEntity,BucketDTO> {
         received_events_url: param.organization.received_events_url,
         type: param.organization.type,
         site_admin: param.organization.site_admin
-      }
+      }: undefined
     };
   }
   

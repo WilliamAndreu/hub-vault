@@ -22,7 +22,7 @@ export interface BucketDBO {
   size: number
   forks_count: number
   open_issues_count: number
-  organization: OrganizationDBO
+  organization?: OrganizationDBO
 
 }
 

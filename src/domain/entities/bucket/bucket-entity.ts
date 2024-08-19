@@ -22,7 +22,7 @@ export interface BucketEntity {
   size: number
   forks_count: number
   open_issues_count: number
-  organization: OrganizationEntity
+  organization?: OrganizationEntity
 
 }
 
