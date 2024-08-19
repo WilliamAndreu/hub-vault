@@ -27,6 +27,7 @@
     "@ngx-dropzone/cdk": "^17.3.0",
     "crypto-js": "^4.2.0",
     "mustache": "^4.2.0",
+    "ngx-doc-viewer": "^15.0.1",
     "ngx-infinite-scroll": "^10.0.0",
     "prompt-sync": "^4.2.0",
     "rxjs": "~7.4.0",

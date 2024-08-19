@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
-  apiBaseUrl: "https://api.github.com/repos/WilliamAndreu/hybrid-storage",
-
+  apiBaseUrl: process.env['API_BASE_URL'],
+  cryptoKey: process.env['CRYPTO_KEY'],
+  gitHubToken: process.env['GB-TOKEN'],
   mainDirectories: [
-
     {
       directoryName: "Angular",
       directoryPath: "angular",

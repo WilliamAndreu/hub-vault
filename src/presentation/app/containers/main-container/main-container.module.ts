@@ -13,6 +13,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatRippleModule } from "@angular/material/core";
 import { LocalStorageService } from "src/core/services/local-storage.service";
 import { MainContainerViewModel } from "./viewmodel/main-container.viewmodel";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [MainContainerComponent],
@@ -30,6 +31,7 @@ import { MainContainerViewModel } from "./viewmodel/main-container.viewmodel";
     MatIcon,
     MatSidenavModule,
     MatRippleModule,
+    MatProgressBarModule
   ],
   providers: [MainContainerViewModel],
 })

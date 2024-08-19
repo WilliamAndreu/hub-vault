@@ -3,6 +3,7 @@ import { MediaMatcher } from "@angular/cdk/layout";
 import { environment } from "@environments/environment";
 import { MainContainerViewModel } from "../viewmodel/main-container.viewmodel";
 import { MainDirectoryInterface } from "src/core/public-interface/main-directory-interface";
+import { LoaderService } from "src/core/services/loader.service";
 
 @Component({
   templateUrl: "./main-container.component.html",
@@ -17,7 +18,8 @@ export class MainContainerComponent {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    public viewModel: MainContainerViewModel
+    public viewModel: MainContainerViewModel,
+    private  loaderService: LoaderService
   ) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -35,5 +37,10 @@ export class MainContainerComponent {
 
   isDirectorySelected(directoryName: string): any {
     return this.viewModel.selectedTech()?.directoryName === directoryName;
+  }
+  initLoaderService() {
+    this.loaderService.loaderState.subscribe((state) => {
+      
+    });
   }
 }

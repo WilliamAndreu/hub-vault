@@ -1,6 +1,6 @@
 import { Mapper } from 'src/core/core-interface/mapper';
 import { ContentDBO } from '@data/datasource/content/local/dbo/content.dbo';
-import { ContentEntity } from '@models/content/content-entity';
+import { ContentEntity } from '@models/content/content.entity';
 
 export class ContentDboRepositoryMapper extends Mapper<ContentDBO[], ContentEntity[]> {
 

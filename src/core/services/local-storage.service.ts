@@ -9,7 +9,7 @@ import { MainDirectoryInterface } from '../public-interface/main-directory-inter
 })
 export class LocalStorageService {
   private readonly techKey = 'SELECTED_TECH_KEY';
-  private readonly cryptoKey = "HUB_VAULT!@ENV";
+  private readonly cryptoKey = environment.cryptoKey;
   private selectedTechSubject: BehaviorSubject<MainDirectoryInterface>;
 
   constructor() {

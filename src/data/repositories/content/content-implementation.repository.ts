@@ -1,11 +1,12 @@
 import {Observable, map, of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { ContentDboRepositoryMapper } from './mappers/content-dbo-repository.mapper';
-import { ContentDtoRepositoryMapper } from './mappers/content-dto-repository.mapper';
+import { ContentDboRepositoryMapper } from './mappers/content/content-list-dbo-repository.mapper';
+import { ContentDtoRepositoryMapper } from './mappers/content/content-list-dto-repository.mapper';
 import { ContentRepository } from 'src/domain/repositories/content/content.repository';
-import { ContentEntity } from '@models/content/content-entity';
+import { ContentEntity } from '@models/content/content.entity';
 import { ContentRemoteDataSource } from '../../datasource/content/source/content-remote-datasource';
-import { ContentLocalDataSource } from '../../datasource/content/source/content-local-datasource';
+import { ContentModifiedDtoRepositoryMapper } from './mappers/content-modified/content-modified-dto-repository.mapper';
+import { ContentModifiedEntity } from '@models/content/content-modified.entity';
 
 @Injectable()
 export class ContentImpRepository extends ContentRepository {
@@ -13,6 +14,7 @@ export class ContentImpRepository extends ContentRepository {
 
   contentDboMapper = new ContentDboRepositoryMapper();
   contentDtoMapper = new ContentDtoRepositoryMapper();
+  modifiedContetnDtoMapper = new ContentModifiedDtoRepositoryMapper();
 
 
   constructor(private contentRemoteDataSource: ContentRemoteDataSource) {
@@ -25,10 +27,16 @@ export class ContentImpRepository extends ContentRepository {
       map(this.contentDtoMapper.mapTo)
       ) 
     }
-    
-  override uploadContent(params: { file: string; path: string; }): Observable<any> {
-    throw new Error('Method not implemented.');
-  }
-
+            
+    override uploadContent(params: { fileBase64: string; path: string; fileName: string; }): Observable<ContentModifiedEntity> {
+      return this.contentRemoteDataSource.uploadContent(params).pipe(
+        map(this.modifiedContetnDtoMapper.mapTo)
+      );
+    }
+    override deleteContent(params: {path: string; sha: string}): Observable<ContentModifiedEntity> {
+      return this.contentRemoteDataSource.deleteContent(params).pipe(
+        map(this.modifiedContetnDtoMapper.mapTo)
+        ) 
+    }
 
 }

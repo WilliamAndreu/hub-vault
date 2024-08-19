@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   apiBaseUrl: "https://api.github.com/repos/WilliamAndreu/hybrid-storage",
-//  apiBaseUrl: "https://api.github.com/repos/rudoapps/hybrid-storage",
-
+  cryptoKey: "HUB_VAULT!@ENV",
+  gitHubToken: "",
   mainDirectories: [
 
     {

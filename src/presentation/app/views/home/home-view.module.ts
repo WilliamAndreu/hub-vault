@@ -17,6 +17,10 @@ import {ClipBoardComponent } from '../../shared-components/clip-board-component/
 import {BreadCrumbComponent } from "../../shared-components/breadCrumb/breadCrumb.component";
 import {HttpClientModule } from '@angular/common/http';
 import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
+import {MatMenuModule} from '@angular/material/menu';
+import {  MatDialogModule } from "@angular/material/dialog";
+
+
 
 @NgModule({
   declarations: [HomeComponent],
@@ -37,8 +41,11 @@ import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
     BreadCrumbComponent,
     HttpClientModule,
     DropzoneCdkModule,
-    ReactiveFormsModule
-],
-  providers: [HomeViewModel]
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatDialogModule,
+
+  ],
+  providers: [HomeViewModel],
 })
 export class HomeModule {}

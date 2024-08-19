@@ -40,13 +40,18 @@ mat-toolbar {
   max-height: 64px !important;
 }
 
+
+
 .page-container {
   margin-top: 64px;
   height: calc(100vh - 64px) !important;
   overflow: hidden;
+  max-width: 2000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mat-drawer-container {
-  background-color: #26272b !important;
+  @apply bg-primary;
   color: #26272b !important;
 }

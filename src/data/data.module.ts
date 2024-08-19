@@ -18,6 +18,8 @@ import {ContentImpRepository} from "@data/repositories/content/content-implement
 import {ContentRemoteDataSourceImp} from "@data/datasource/content/remote/content-remote-datasource-imp";
 import {ContentLocalDataSourceImp} from "@data/datasource/content/local/content-local-datasource-imp";
 import {ContentLocalDataSource} from "@data/datasource/content/source/content-local-datasource";
+import { UploadContentUseCase } from '@usecases/content/upload-content.usecase';
+import { DeleteContentUseCase } from '@usecases/content/delete-content.usecase';
 
 @NgModule({
   providers: [
@@ -30,6 +32,8 @@ import {ContentLocalDataSource} from "@data/datasource/content/source/content-lo
     { provide: BucketLocalDataSource, useClass: BucketLocalDataSourceImp },
 
     GetContentUseCase,
+    UploadContentUseCase,
+    DeleteContentUseCase,
     { provide: ContentRepository, useClass: ContentImpRepository },
     { provide: ContentRemoteDataSource, useClass: ContentRemoteDataSourceImp },
     { provide: ContentLocalDataSource, useClass: ContentLocalDataSourceImp },
