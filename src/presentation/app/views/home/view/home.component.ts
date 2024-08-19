@@ -29,6 +29,9 @@ export class HomeComponent {
     this.initDropFileObserver();
     console.log("Env is " + environment.production)
     console.log("Bearer " + environment.gitHubToken)
+    console.log("Api is " + environment.apiBaseUrl)
+    console.log("CRT IS " + environment.cryptoKey)
+
   }
 
   public selectContent(content: ContentEntity) {
