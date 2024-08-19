@@ -1,4 +1,12 @@
-.font-text{
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:3127323802.
-    color: white !important;
+
+
+input, select, textarea{
+    color: white  !important;}
+
+textarea:focus, input:focus {
+    color: white  !important;
 }
+
+input::placeholder{
+    color: white  !important;
+  }
