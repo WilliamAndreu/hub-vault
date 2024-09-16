@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class LoaderService {
   // Creamos un BehaviorSubject que mantiene el estado del loader
@@ -21,5 +21,10 @@ export class LoaderService {
   // Método para ocultar el loader
   hideLoader() {
     this.loaderSubject.next(false);
+  }
+
+  // Método para obtener el valor actual del loader (true o false)
+  getCurrentLoaderState(): boolean {
+    return this.loaderSubject.value;
   }
 }

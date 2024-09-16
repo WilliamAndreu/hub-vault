@@ -7,12 +7,10 @@ import { FileSizePipe } from './file-size.pipe';
 import { FileIconPipe } from './file-type-icon.pipe';
 
 @NgModule({
-  declarations: [
-    //FilterCharactersByNamePipe, 
-    SecurePipe,FormatGitHubRepoName, FileSizePipe, FileIconPipe],
+  declarations: [SecurePipe,FormatGitHubRepoName, FileSizePipe, FileIconPipe],
   imports: [CommonModule],
   exports: [
-     //FilterCharactersByNamePipe,
+  
      SecurePipe,FormatGitHubRepoName, FileSizePipe, FileIconPipe],
 })
 export class PipesModule {}

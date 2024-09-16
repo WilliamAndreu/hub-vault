@@ -1,14 +1,14 @@
-import { Injectable, inject } from '@angular/core';
-import { environment } from '@environments/environment';
-import * as CryptoJS from 'crypto-js';
-import { BehaviorSubject } from 'rxjs';
-import { MainDirectoryInterface } from '../public-interface/main-directory-interface';
-import { CryptoService } from './cryto-service.service';
+import { Injectable, inject } from "@angular/core";
+import { environment } from "@environments/environment";
+import * as CryptoJS from "crypto-js";
+import { BehaviorSubject } from "rxjs";
+import { MainDirectoryInterface } from "../public-interface/main-directory-interface";
+import { CryptoService } from "./cryto-service.service";
 
 @Injectable({
   providedIn: "root",
 })
-export class LocalStorageService {
+export class DirectoryStorageService {
   private readonly techKey = "S_T_K";
   private readonly cryptoKey = environment.cryptoKey;
   private selectedTechSubject: BehaviorSubject<MainDirectoryInterface>;

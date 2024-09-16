@@ -55,3 +55,8 @@ mat-toolbar {
   @apply bg-primary;
   color: #26272b !important;
 }
+
+.progress-bar{
+  position: absolute;
+  z-index: 9999;
+}

@@ -11,7 +11,6 @@ import { MatToolbar } from "@angular/material/toolbar";
 import { MatIcon } from "@angular/material/icon";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatRippleModule } from "@angular/material/core";
-import { LocalStorageService } from "src/core/services/local-storage.service";
 import { MainContainerViewModel } from "./viewmodel/main-container.viewmodel";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 
@@ -31,7 +30,7 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
     MatIcon,
     MatSidenavModule,
     MatRippleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   providers: [MainContainerViewModel],
 })

@@ -1,30 +1,30 @@
-import { Injectable, Signal, signal } from "@angular/core";
+import { Injectable, Signal, inject, signal } from "@angular/core";
 import { GetBucketUseCase } from "@usecases/bucket/get-bucket.usecase";
 import { BucketEntity } from "@models/bucket/bucket-entity";
 import { GetContentUseCase } from "@usecases/content/get-content.usecase";
-import { LocalStorageService } from "src/core/services/local-storage.service";
 import { ContentEntity } from "@models/content/content.entity";
-import { Observable, catchError, of } from "rxjs";
+import { catchError, of } from "rxjs";
 import { GithubRouterService } from "src/core/services/git-hub-router.service";
 import { GitHubFileDownloadService } from "src/core/services/github-download-file.service";
-import { FileInputValue } from "@ngx-dropzone/cdk";
 import { UploadContentUseCase } from "@usecases/content/upload-content.usecase";
 import { DeleteContentUseCase } from "@usecases/content/delete-content.usecase";
 import { MatDialog } from "@angular/material/dialog";
 import { FilePreviewComponentComponent } from "src/presentation/app/shared-components/file-preview-component/file-preview.component";
+import { LoaderService } from "src/core/services/loader.service";
+import { DirectoryStorageService } from "src/core/services/directory-storage.service";
 
 @Injectable()
 export class HomeViewModel {
   bucketData: Signal<BucketEntity | undefined> = signal(undefined);
   contentData: Signal<ContentEntity[] | undefined> = signal(undefined);
   error: Signal<string | undefined> = signal(undefined);
-
+  private loaderService = inject(LoaderService);
   constructor(
     private readonly getBucketUseCase: GetBucketUseCase,
     private readonly getContentUseCase: GetContentUseCase,
     private readonly deleteContentUseCase: DeleteContentUseCase,
     private readonly uploadContentUseCase: UploadContentUseCase,
-    private readonly localStorageService: LocalStorageService,
+    private readonly directoryStorageService: DirectoryStorageService,
     private readonly gitHubRouter: GithubRouterService,
     private readonly gitHubFileDownloader: GitHubFileDownloadService,
     private readonly dialog: MatDialog
@@ -33,6 +33,7 @@ export class HomeViewModel {
   }
 
   private initializeViewModel(): void {
+    this.loaderService.showLoader();
     this.loadBucketData();
     this.verifyLocalDirectory();
     this.initGitHubRouterObserver();
@@ -44,10 +45,8 @@ export class HomeViewModel {
 
   public downloadFile(url: string, fileName: string) {
     this.gitHubFileDownloader.downloadFile(url, fileName).subscribe({
-      next: () => {
-      },
-      error: (error) => {
-      },
+      next: () => {},
+      error: (error) => {},
     });
   }
 
@@ -56,8 +55,7 @@ export class HomeViewModel {
       next: (content) => {
         this.loadContentData(this.gitHubRouter.getCurrentPath());
       },
-      error: (error) => {
-      },
+      error: (error) => {},
     });
   }
 
@@ -74,11 +72,9 @@ export class HomeViewModel {
           next: (content) => {
             this.loadContentData(this.gitHubRouter.getCurrentPath());
           },
-          error: (error) => {
-          },
+          error: (error) => {},
         });
-    } catch (error) {
-    }
+    } catch (error) {}
   }
 
   private async convertFileToBase64(file: File): Promise<string | ArrayBuffer | null> {
@@ -113,12 +109,18 @@ export class HomeViewModel {
   }
 
   private verifyLocalDirectory(): void {
-    this.localStorageService.getMainDirectoryObservable().subscribe({
+    this.directoryStorageService.getMainDirectoryObservable().subscribe({
       next: (directory) => {
         this.gitHubRouter.resetRoutes();
         this.loadContentData(directory?.directoryPath || "");
+        setTimeout(() => {
+          this.loaderService.hideLoader();
+        }, 1000);
       },
-      error: (err) => this.handleError("Error retrieving directory", err),
+      error: (err) => {
+        this.loaderService.hideLoader();
+        this.handleError("Error retrieving directory", err);
+      },
     });
   }
 
