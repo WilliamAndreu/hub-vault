@@ -4,23 +4,21 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "https://api.github.com/repos/WilliamAndreu/hybrid-storage",
-  cryptoKey: "HUB_VAULT!@ENV",
+  apiBaseUrl: "",
+  cryptoKey: "",
   gitHubToken: "",
   mainDirectories: [
-
     {
       directoryName: "Angular",
       directoryPath: "angular",
-      icon: "assets/angular.webp"
+      icon: "assets/angular.webp",
     },
-    
+
     {
       directoryName: "Flutter",
       directoryPath: "flutter",
-      icon: "assets/flutter.webp"
-    }
-  ]
-
+      icon: "assets/flutter.webp",
+    },
+  ],
 };
 

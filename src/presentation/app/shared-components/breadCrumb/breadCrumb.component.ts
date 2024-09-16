@@ -19,7 +19,6 @@ export class BreadCrumbComponent {
     constructor(private gitHubRouterService: GithubRouterService){
         this.getRoutes();
         effect(() => {
-            console.log(`The routes is: ${this.routesSignal}`);
           });
     }
     getRoutes() {

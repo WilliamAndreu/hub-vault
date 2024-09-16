@@ -33,12 +33,9 @@ export class GithubRouterService {
         updated = true;
       }
     });
-    console.log(updated);
-    // Notificar si hubo cambios
     if (updated) {
      
       this.routesSubject.next([...this.routes]);
-      console.log(this.routes$);
     }
   }
 

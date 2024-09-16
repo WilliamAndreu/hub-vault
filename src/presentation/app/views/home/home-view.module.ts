@@ -27,7 +27,7 @@ import {  MatDialogModule } from "@angular/material/dialog";
   imports: [
     HomeViewRoutingModule,
     CommonModule,
-    DataModule,
+    
     FormsModule,
     PipesModule,
     MatDividerModule,

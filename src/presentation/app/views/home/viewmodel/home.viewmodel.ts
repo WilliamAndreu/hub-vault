@@ -45,10 +45,8 @@ export class HomeViewModel {
   public downloadFile(url: string, fileName: string) {
     this.gitHubFileDownloader.downloadFile(url, fileName).subscribe({
       next: () => {
-        console.log("File downloaded successfully");
       },
       error: (error) => {
-        console.error("Error downloading file:", error);
       },
     });
   }
@@ -56,11 +54,9 @@ export class HomeViewModel {
   public deleteFile(file: ContentEntity) {
     this.deleteContentUseCase.execute({ path: file.path, sha: file.sha }).subscribe({
       next: (content) => {
-        console.log(content);
         this.loadContentData(this.gitHubRouter.getCurrentPath());
       },
       error: (error) => {
-        console.error("Error uploading file:", error);
       },
     });
   }
@@ -68,7 +64,6 @@ export class HomeViewModel {
   async initUploadContent(file: File) {
     try {
       const base64Data = await this.convertFileToBase64(file);
-      console.log(base64Data);
       this.uploadContentUseCase
         .execute({
           fileBase64: base64Data as string,
@@ -77,15 +72,12 @@ export class HomeViewModel {
         })
         .subscribe({
           next: (content) => {
-            console.log(content);
             this.loadContentData(this.gitHubRouter.getCurrentPath());
           },
           error: (error) => {
-            console.error("Error uploading file:", error);
           },
         });
     } catch (error) {
-      console.error("Error converting file:", error);
     }
   }
 
@@ -116,7 +108,6 @@ export class HomeViewModel {
       .subscribe({
         next: (bucket) => {
           this.bucketData = signal(bucket);
-          console.log(this.bucketData());
         },
       });
   }
@@ -143,7 +134,6 @@ export class HomeViewModel {
       .subscribe({
         next: (content) => {
           this.contentData = signal(content);
-          console.log(this.contentData());
         },
       });
   }
@@ -154,7 +144,6 @@ export class HomeViewModel {
   }
   private initGitHubRouterObserver() {
     this.gitHubRouter.routes$.subscribe((url) => {
-      console.log(this.gitHubRouter.getCurrentPath());
       this.loadContentData(this.gitHubRouter.getCurrentPath());
     });
   }

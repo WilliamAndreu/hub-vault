@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '@environments/environment';
 import * as CryptoJS from 'crypto-js';
 import { BehaviorSubject } from 'rxjs';
 import { MainDirectoryInterface } from '../public-interface/main-directory-interface';
+import { CryptoService } from './cryto-service.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class LocalStorageService {
-  private readonly techKey = 'SELECTED_TECH_KEY';
+  private readonly techKey = "S_T_K";
   private readonly cryptoKey = environment.cryptoKey;
   private selectedTechSubject: BehaviorSubject<MainDirectoryInterface>;
-
   constructor() {
     const initialValue = this.loadInitialValue();
     this.selectedTechSubject = new BehaviorSubject<MainDirectoryInterface>(initialValue);
@@ -32,7 +32,7 @@ export class LocalStorageService {
 
   private loadInitialValue(): MainDirectoryInterface {
     const localValue = this.getMainDirectoryStorageItem();
-    return localValue ? JSON.parse(this.decrypt(localValue)) as MainDirectoryInterface : environment.mainDirectories[0] as MainDirectoryInterface;
+    return localValue ? (JSON.parse(this.decrypt(localValue)) as MainDirectoryInterface) : (environment.mainDirectories[0] as MainDirectoryInterface);
   }
 
   private encrypt(value: string): string {

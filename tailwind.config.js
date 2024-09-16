@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      primary: "#18181b",
+      primary: "#161616",
       secondary: "#26272b",
       accent: "#092134",
       purpleLight: "#8f67f7",
@@ -14,8 +14,7 @@ module.exports = {
       purpleDark: "#444153",
       blueLight: "#57afc6",
       greenLight: "#32da85",
-      grey:'#636366',
-
+      grey: "#636366",
       transparent: "transparent",
       current: "currentColor",
       black: colors.black,
