@@ -13,7 +13,6 @@ export const environment = {
       directoryPath: "angular",
       icon: "assets/angular.webp",
     },
-
     {
       directoryName: "Flutter",
       directoryPath: "flutter",
