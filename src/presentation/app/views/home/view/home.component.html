@@ -1,7 +1,7 @@
 
 <app-bread-crumb></app-bread-crumb>
 
-<div class="bg-secondary rounded-lg mt-5 px-2 pb-4 text-white flex flex-col">
+<div class="bg-secondary rounded-lg mt-5 px-2 pb-4 text-white flex flex-col fade-in" >
   @if(viewModel.bucketData()) {
   <div mat-subheader>
     {{ viewModel.bucketData()?.name ?? "" | formatGitHubRepoName }}
@@ -11,15 +11,14 @@
   }
 </div>
 
-<div
+<div 
   [ngClass]="{
     'bg-secondary': this.dropZoneDetector() == false,
     'bg-purpleDark': this.dropZoneDetector() == true,
     'border-dashed': this.dropZoneDetector() == true,
     '!border-purpleLight': this.dropZoneDetector() == true
   }"
-  class="rounded-lg mt-5 px-2 border-0 sm:border-2 border-secondary mb-2"
->
+  class="rounded-lg mt-5 px-2 border-0 sm:border-2 border-secondary mb-2 fade-in">
 
   @if(!viewModel.error()){
   <ngx-dropzone (dragover)="onDragEnter($event)" (dragleave)="onDragLeave($event)">
@@ -29,15 +28,14 @@
     <mat-list class="!text-white !pointer-events-none ">
      
       @for (content of viewModel.contentData(); track content; let idx = $index) {
-          <mat-list-item
+        <mat-list-item
           matRipple
           [matRippleDisabled]="this.optionZoneDetector()"
           [ngClass]="{
             '[&>*]:!pointer-events-none': this.dropZoneDetector() == true
           }"
-          class="!rounded-lg group/item"
-          (click)="selectContent(content)"
-        >
+          class="!rounded-lg group/item fade-in"
+          (click)="selectContent(content)">
           <mat-icon matListItemIcon class="select-none !text-white">{{ content.type | fileIcon }}</mat-icon>
           <div matListItemTitle  class="select-none !text-white">
             {{ content.name }}
