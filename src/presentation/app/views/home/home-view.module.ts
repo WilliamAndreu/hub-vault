@@ -18,7 +18,7 @@ import {BreadCrumbComponent } from "../../shared-components/breadCrumb/breadCrum
 import {HttpClientModule } from '@angular/common/http';
 import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 import {MatMenuModule} from '@angular/material/menu';
-import {  MatDialogModule } from "@angular/material/dialog";
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 
 
@@ -43,7 +43,7 @@ import {  MatDialogModule } from "@angular/material/dialog";
     DropzoneCdkModule,
     ReactiveFormsModule,
     MatMenuModule,
-    MatDialogModule,
+    MatBottomSheetModule,
 
   ],
   providers: [HomeViewModel],

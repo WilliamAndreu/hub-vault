@@ -1,4 +1,4 @@
-
+<mat-progress-bar class="progress-bar"  *ngIf="viewModel.isLoading()" mode="indeterminate"></mat-progress-bar>
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-sidenav-container
     class="example-sidenav-container"
@@ -34,7 +34,6 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <mat-progress-bar class="progress-bar"  *ngIf="viewModel.isLoading()" mode="indeterminate"></mat-progress-bar>
       <mat-toolbar color="primary" class="example-toolbar !bg-secondary">
         <button mat-icon-button (click)="snav.toggle()">
           <mat-icon class="!text-white">menu</mat-icon>

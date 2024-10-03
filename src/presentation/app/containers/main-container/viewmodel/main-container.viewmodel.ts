@@ -17,6 +17,7 @@ export class MainContainerViewModel {
   }
 
   public saveMainDirectorySelection(mainDirectory: MainDirectoryInterface) {
+    this.loaderService.showLoader();
     this.directorySorageService.setMainDirectory(mainDirectory);
   }
 
