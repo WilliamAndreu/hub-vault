@@ -1,6 +1,12 @@
-:host {
-  display: block;
+::ng-deep .mat-bottom-sheet-container {
   @apply bg-secondary;
   @apply rounded-lg;
 }
 
+.mat-list-item {
+  @apply text-white;
+}
+
+.skeleton-loader {
+  @apply bg-secondary brightness-110;
+}

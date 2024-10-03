@@ -8,7 +8,7 @@ import { GithubRouterService } from "src/core/services/git-hub-router.service";
 import { GitHubFileDownloadService } from "src/core/services/github-download-file.service";
 import { UploadContentUseCase } from "@usecases/content/upload-content.usecase";
 import { DeleteContentUseCase } from "@usecases/content/delete-content.usecase";
-import { MatDialog } from "@angular/material/dialog";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { FilePreviewComponentComponent } from "src/presentation/app/shared-components/file-preview-component/file-preview.component";
 import { LoaderService } from "src/core/services/loader.service";
 import { DirectoryStorageService } from "src/core/services/directory-storage.service";
@@ -19,6 +19,8 @@ export class HomeViewModel {
   contentData: Signal<ContentEntity[] | undefined> = signal(undefined);
   error: Signal<string | undefined> = signal(undefined);
   private loaderService = inject(LoaderService);
+  private bottomSheet = inject(MatBottomSheet);
+
   constructor(
     private readonly getBucketUseCase: GetBucketUseCase,
     private readonly getContentUseCase: GetContentUseCase,
@@ -26,8 +28,7 @@ export class HomeViewModel {
     private readonly uploadContentUseCase: UploadContentUseCase,
     private readonly directoryStorageService: DirectoryStorageService,
     private readonly gitHubRouter: GithubRouterService,
-    private readonly gitHubFileDownloader: GitHubFileDownloadService,
-    private readonly dialog: MatDialog
+    private readonly gitHubFileDownloader: GitHubFileDownloadService
   ) {
     this.initializeViewModel();
   }
@@ -149,7 +150,10 @@ export class HomeViewModel {
       this.loadContentData(this.gitHubRouter.getCurrentPath());
     });
   }
-  public openDialog(content: ContentEntity) {
-    this.dialog.open(FilePreviewComponentComponent, { data: content, panelClass: ["full-screen-modal"] });
+  
+  public openBottomSheet(content: ContentEntity) {
+    this.bottomSheet.open(FilePreviewComponentComponent, {
+      data: content,
+    });
   }
 }

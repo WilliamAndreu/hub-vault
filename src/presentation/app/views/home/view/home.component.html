@@ -7,7 +7,7 @@
     {{ viewModel.bucketData()?.name ?? "" | formatGitHubRepoName }}
   </div>
   <span class="pl-4 mb-0 sm:mb-2">{{ viewModel.bucketData()?.description }}</span>
-  <app-clip-board class="pl-4" [url]="viewModel.bucketData()?.html_url ?? ''"></app-clip-board>
+  <app-clip-board class="pl-4" [url]="viewModel.bucketData()?.html_url ?? ''" [urlName]="viewModel.bucketData() ? viewModel.bucketData()!.name + ' url' : ''"></app-clip-board>
   }
 </div>
 

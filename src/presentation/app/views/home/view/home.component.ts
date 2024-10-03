@@ -33,7 +33,7 @@ export class HomeComponent {
     if (content.type === "dir") {
       this.viewModel.addRouteToGithubRouter(content.url);
     } else {
-      this.viewModel.openDialog(content);
+      this.viewModel.openBottomSheet(content);
     }
   }
 
@@ -66,8 +66,6 @@ export class HomeComponent {
   onOptionZoneLevew(event: any) {
     this.optionZoneDetector.set(false);
   }
-
-
 
   stopEventsPropagation(event: any) {
     event.stopPropagation();
