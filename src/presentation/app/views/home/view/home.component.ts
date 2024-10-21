@@ -19,7 +19,7 @@ export interface Section {
 })
 export class HomeComponent {
   //validators = [FileInputValidators.accept("image/*")];
-  profileImg = new FormControl<FileInputValue>(null);
+  profileImg = new FormControl<FileInputValue[]>([]);
   dropZoneDetector = signal(false);
   optionZoneDetector = signal(false);
 
@@ -40,11 +40,14 @@ export class HomeComponent {
   private initDropFileObserver() {
     this.profileImg.valueChanges.subscribe((value) => {
       this.dropZoneDetector.set(false);
-      if (value) {
-        this.viewModel.initUploadContent(value as File);
+  
+      if (value && value.length > 0) {
+        // Asegurarse de pasar todos los archivos seleccionados
+        this.viewModel.initUploadContent(value as File[]);
       }
     });
   }
+  
 
   onDragEnter(event: DragEvent) {
     event.preventDefault();

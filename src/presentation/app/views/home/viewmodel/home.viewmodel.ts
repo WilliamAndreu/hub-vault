@@ -9,9 +9,10 @@ import { GitHubFileDownloadService } from "src/core/services/github-download-fil
 import { UploadContentUseCase } from "@usecases/content/upload-content.usecase";
 import { DeleteContentUseCase } from "@usecases/content/delete-content.usecase";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
-import { FilePreviewComponentComponent } from "src/presentation/app/shared-components/file-preview-component/file-preview.component";
+import { FilePreviewComponent } from "src/presentation/app/shared-components/file-preview-component/file-preview.component";
 import { LoaderService } from "src/core/services/loader.service";
 import { DirectoryStorageService } from "src/core/services/directory-storage.service";
+import { NoopScrollStrategy } from "@angular/cdk/overlay";
 
 @Injectable()
 export class HomeViewModel {
@@ -52,6 +53,7 @@ export class HomeViewModel {
   }
 
   public deleteFile(file: ContentEntity) {
+    this.loaderService.showLoader();
     this.deleteContentUseCase.execute({ path: file.path, sha: file.sha }).subscribe({
       next: (content) => {
         this.loadContentData(this.gitHubRouter.getCurrentPath());
@@ -60,23 +62,34 @@ export class HomeViewModel {
     });
   }
 
-  async initUploadContent(file: File) {
+  async initUploadContent(files: File[]) {
+    this.loaderService.showLoader();
+    
     try {
-      const base64Data = await this.convertFileToBase64(file);
-      this.uploadContentUseCase
-        .execute({
-          fileBase64: base64Data as string,
-          path: this.gitHubRouter.getCurrentPath(),
-          fileName: file.name,
-        })
-        .subscribe({
-          next: (content) => {
-            this.loadContentData(this.gitHubRouter.getCurrentPath());
-          },
-          error: (error) => {},
-        });
-    } catch (error) {}
+      // Iterar sobre cada archivo de manera secuencial
+      for (const file of files) {
+        const base64Data = await this.convertFileToBase64(file);
+        
+        // Esperar a que termine la subida de cada archivo antes de continuar
+        await this.uploadContentUseCase
+          .execute({
+            fileBase64: base64Data as string,
+            path: this.gitHubRouter.getCurrentPath(),
+            fileName: file.name,
+          })
+          .toPromise(); // Convertir el observable a promesa
+      }
+  
+      // Cargar el contenido después de que todos los archivos se hayan subido
+      this.loadContentData(this.gitHubRouter.getCurrentPath());
+    } catch (error) {
+      console.error('Error al subir los archivos:', error);
+    } finally {
+      this.loaderService.hideLoader();
+    }
   }
+  
+  
 
   private async convertFileToBase64(file: File): Promise<string | ArrayBuffer | null> {
     return new Promise((resolve, reject) => {
@@ -137,6 +150,7 @@ export class HomeViewModel {
       .subscribe({
         next: (content) => {
           this.contentData = signal(content);
+          this.loaderService.hideLoader();
         },
       });
   }
@@ -152,7 +166,7 @@ export class HomeViewModel {
   }
   
   public openBottomSheet(content: ContentEntity) {
-    this.bottomSheet.open(FilePreviewComponentComponent, {
+    this.bottomSheet.open(FilePreviewComponent, {
       data: content,
     });
   }

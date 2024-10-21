@@ -1,4 +1,3 @@
-
 <app-bread-crumb></app-bread-crumb>
 
 <div class="bg-secondary rounded-lg mt-5 px-2 pb-4 text-white flex flex-col fade-in" >
@@ -22,7 +21,7 @@
 
   @if(!viewModel.error()){
   <ngx-dropzone (dragover)="onDragEnter($event)" (dragleave)="onDragLeave($event)">
-    <input type="file" fileInput [formControl]="profileImg" />
+    <input type="file" fileInput [formControl]="profileImg" multiple />
     <div  class="!pointer-events-none px-4 py-4 font-test text-white">Folders</div>
     <div class="list-container">
     <mat-list class="!text-white !pointer-events-none ">
@@ -76,6 +75,3 @@
   </div>
   }
 </div>
-
-
-
