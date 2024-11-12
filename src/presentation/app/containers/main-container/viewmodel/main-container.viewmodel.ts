@@ -4,6 +4,9 @@ import { toSignal } from "@angular/core/rxjs-interop";
 import { environment } from "@environments/environment";
 import { LoaderService } from "src/core/services/loader.service";
 import { DirectoryStorageService } from "src/core/services/directory-storage.service";
+import { AuthService } from "src/core/services/firebase-auth.service";
+import { Router } from "@angular/router";
+import { lastValueFrom } from "rxjs";
 
 @Injectable()
 export class MainContainerViewModel {
@@ -11,7 +14,7 @@ export class MainContainerViewModel {
   selectedTech: Signal<MainDirectoryInterface | undefined>;
   mainDirectoriesList: MainDirectoryInterface[] = environment.mainDirectories;
   private loaderService = inject(LoaderService);
-  constructor(private directorySorageService: DirectoryStorageService) {
+  constructor(private directorySorageService: DirectoryStorageService, private authService: AuthService, private router: Router) {
     this.selectedTech = toSignal(this.directorySorageService.getMainDirectoryObservable());
     this.observeLoader();
   }
@@ -36,5 +39,14 @@ export class MainContainerViewModel {
         console.error(err);
       },
     });
+  }
+
+  public async logOut() {
+    try {
+      await lastValueFrom(this.authService.logout());
+      this.router.navigate(["/login"]);
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
   }
 }

@@ -1,48 +1,114 @@
 <mat-progress-bar class="progress-bar"  *ngIf="viewModel.isLoading()" mode="indeterminate"></mat-progress-bar>
+
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+
   <mat-sidenav-container
+
     class="example-sidenav-container"
+
     [style.marginTop.px]="mobileQuery.matches ? 0 : 0"
+
   >
+
     <mat-sidenav
+
       [opened]="mobileQuery.matches ? 'false' : 'false'"
+
       #snav
-      [mode]="mobileQuery.matches ? 'over' : 'side'"
+
+      [mode]="mobileQuery.matches ? 'over' : 'push'"
+
       class="!bg-secondary"
+
     >
+
       <mat-nav-list>
+
+        <div class="w-100 flex flex-row align-center justify-center">
+
+          <img class="w-10 h-10 mt-2 mb-5" src="assets/login_logo_2.webp" />
+
+          </div>
+
         @for (directory of viewModel.mainDirectoriesList; track
+
         viewModel.mainDirectoriesList) {
+
         <div
+
           matRipple
+
           class="border-l-4 border-purpleLight !text-white w-full h-12 inline-flex justify-start items-center p-3 cursor-pointer"
+
           mat-list-item
+
           (click)="selectTech(directory)"
-          [ngClass]="{
+
+          [ngClass]="{ 
+
             'border-l-4 border-purpleLight': isDirectorySelected(
+
               directory.directoryName
-            )
+
+            ), 'bg-blackDark' : isDirectorySelected(directory.directoryName)  
+
           }"
+
         >
+
           <img class="h-7 w-6 select-none" [src]="directory.icon" />
-          <span class="text-purpleLight ml-3 select-none text-base/6">
+
+          <span class="text-purpleLight ml-3 select-none text-base/6"           [ngClass]="{ 
+
+            'text-purpleLight': isDirectorySelected(directory.directoryName),
+             'text-white' : !isDirectorySelected(directory.directoryName)  
+
+          }">
+
             {{ directory.directoryName }}
+
           </span>
+
         </div>
+
         }
+
       </mat-nav-list>
+
     </mat-sidenav>
 
+
+
     <mat-sidenav-content>
+
+
       <mat-toolbar color="primary" class="example-toolbar !bg-secondary">
         <button mat-icon-button (click)="snav.toggle()">
           <mat-icon class="!text-white">menu</mat-icon>
         </button>
-        <h1 class="example-app-name">Hub Vault</h1>
+
+<div class="flex flex-row justify-start items-center">
+  <img class="w-5 h-5 mb-1 mr-2" src="assets/login_logo_2.webp" />
+  <h1 class="example-app-name inline-block"> Hub Vault</h1>
+</div>
+       
+
+        <button class="ml-auto" mat-icon-button (click)="viewModel.logOut()">
+
+          <mat-icon class="!text-white">logout</mat-icon>
+
+        </button>
+
       </mat-toolbar>
-      <section class="page-container p-5 bg-primary">
+
+      <section class="page-container p-5 bg-blackDark">
+
         <router-outlet />
+
       </section>
+
     </mat-sidenav-content>
+
   </mat-sidenav-container>
+
 </div>

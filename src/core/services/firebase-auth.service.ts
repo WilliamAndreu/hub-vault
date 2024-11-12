@@ -52,6 +52,10 @@ export class AuthService {
     );
   }
 
+  logout(): Observable<void> {
+    return this.signOut();
+  }
+
   isAuthenticated(): Observable<boolean> {
     return this.currentUser.asObservable().pipe(map((user) => !!user));
   }

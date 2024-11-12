@@ -1,124 +1,264 @@
 @tailwind base;
+
 @tailwind components;
+
 @tailwind utilities;
 
+
+
 html,
+
 body {
+
   height: 100%;
-  @apply bg-primary;
+
+  @apply bg-blackDark;
+
 }
+
 body {
+
   margin: 0;
+
   font-family: Roboto, "Helvetica Neue", sans-serif;
+
 }
+
+
 
 mat-icon {
+
   color: black !important;
+
 }
+
+
 
 mat-drawer {
+
   overscroll-behavior: none !important;
+
   .mat-drawer-inner-container {
+
     overscroll-behavior: none !important;
+
   }
+
 }
+
 .mat-mdc-dialog-container .mdc-dialog__surface {
+
   background-color: transparent !important;;
+
 }
+
 .mat-mdc-dialog-content {
+
    max-height: 90dvh !important; 
+
 }
+
+
 
 .font-test{
+
   font:  16px/28px Roboto, sans-serif;
+
   letter-spacing: .009375em;
 
+
+
 }
+
+
+
+
 
 
 
 ::-webkit-scrollbar {
+
   width: 2px;
+
   height: 2px;
+
 }
+
 ::-webkit-scrollbar-button {
+
   width: 0px;
+
   height: 0px;
+
 }
+
 ::-webkit-scrollbar-thumb {
+
   background: #e1e1e1;
+
   border: 0px none #ffffff;
+
   border-radius: 50px;
+
 }
+
 ::-webkit-scrollbar-thumb:hover {
+
   background: #ffffff;
+
 }
+
 ::-webkit-scrollbar-thumb:active {
+
   background: #000000;
+
 }
+
 ::-webkit-scrollbar-track {
+
   background: #666666;
+
   border: 0px none #ffffff;
+
   border-radius: 50px;
+
 }
+
 ::-webkit-scrollbar-track:hover {
+
   background: #666666;
+
 }
+
 ::-webkit-scrollbar-track:active {
+
   background: #333333;
+
 }
+
 ::-webkit-scrollbar-corner {
+
   background: transparent;
+
 }
+
+
 
 img {
+
   pointer-events: none !important;
+
 }
+
+
 
 .mat-mdc-progress-bar {
-  --mdc-linear-progress-active-indicator-color: #8f67f7;
+
+  --mdc-linear-progress-active-indicator-color: #CFFF4D;
+
   --mdc-linear-progress-track-color: rgba(221, 221, 221, 0.25);
+
 }
+
+.mat-snack-bar-container {
+
+  transition: opacity 0.3s ease;
+
+  opacity: 0;
+
+}
+
+
+
+.mat-snack-bar-container.ng-animating-opened {
+
+  opacity: 1;
+
+}
+
+
 
 .cdk-overlay-container {
+
     position: fixed;
+
     z-index: 1000;
+
     cursor: default !important;
+
 }
+
+
 
 .mat-mdc-snack-bar-action {
+
     color: #8f67f7 !important;
+
 }
+
+
 
 .fade-in {
+
   animation: fadeIn 0.5s;
+
   -webkit-animation: fadeIn 0.5s;
+
   -moz-animation: fadeIn 0.5s;
+
   -o-animation: fadeIn 0.5s;
+
   -ms-animation: fadeIn 0.5s;
+
 }
+
+
 
 @keyframes fadeIn {
+
   0% { opacity: 0; }
+
   100% { opacity: 1; }
+
 }
+
+
 
 @-moz-keyframes fadeIn {
+
   0% { opacity: 0; }
+
   100% { opacity: 1; }
+
 }
+
+
 
 @-webkit-keyframes fadeIn {
+
   0% { opacity: 0; }
+
   100% { opacity: 1; }
+
 }
+
+
 
 @-o-keyframes fadeIn {
+
   0% { opacity: 0; }
+
   100% { opacity: 1; }
+
 }
 
+
+
 @-ms-keyframes fadeIn {
+
   0% { opacity: 0; }
+
   100% { opacity: 1; }
+
 }
+
