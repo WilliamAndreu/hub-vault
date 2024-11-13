@@ -1,7 +1,7 @@
 
 export class FileTypeDetectorUtil {
   // Listas de extensiones de archivos admitidas
-  private imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.svg'];
+  private imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.svg', '.webp', '.ico'];
   private docExtensions = ['.ppt', '.pptx', '.doc', '.docx', '.xls', '.xlsx'];
   private codeExtensions = ['.css', '.html', '.php', '.c', '.cpp', '.h', '.hpp', '.js'];
   private miscExtensions = ['.pdf', '.pages', '.ai', '.psd', '.tiff', '.dxf', '.svg', '.eps', '.ps', '.ttf', '.xps', '.zip', '.rar'];

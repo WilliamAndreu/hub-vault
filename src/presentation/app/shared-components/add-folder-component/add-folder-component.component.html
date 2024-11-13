@@ -1,0 +1,64 @@
+<div class="p-6 space-y-4">
+  <h2 class="text-2xl font-semibold text-white mb-4">Subir Archivos</h2>
+
+  <div>
+    <label for="directoryName" class="block text-sm font-medium text-white mb-1">Nombre del Directorio</label>
+    <input [(ngModel)]="directoryName" id="directoryName" type="text" class="w-full p-4 bg-[#26272b] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CFFF4D] text-white mt-1">
+  </div>
+
+  <div class="flex items-center space-x-4">
+    <div class="relative flex-grow">
+      <input type="file" (change)="handleFileInput($event)" id="fileUpload" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+      <button type="button" class="w-full bg-[#26272b] text-[#CFFF4D] hover:bg-[#CFFF4D] hover:text-[#111316] font-medium p-4 rounded-lg flex items-center justify-center transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Elegir Archivos
+      </button>
+    </div>
+    <span class="text-sm text-[#CFFF4D]">{{ selectedFiles.length }} archivo{{ selectedFiles.length !== 1 ? 's' : '' }}</span>
+  </div>
+
+  <!-- Contenedor de mensaje de error con menor altura -->
+  <div style="height: 16px;">
+    <div *ngIf="showError" class="text-sm text-red-500">
+      Debes seleccionar al menos una imagen para subir.
+    </div>
+  </div>
+
+  <!-- Contenedor de vista previa con marcador de posición -->
+  <div class="preview-container">
+    <h3 class="text-sm font-medium text-white mb-2">Archivos Seleccionados:</h3>
+
+    <div *ngIf="selectedFiles.length === 0" class="empty-preview">
+      <!-- Contenedor marcador de posición con estilo -->
+      <div class="placeholder w-20 h-20 border-dashed border-2 border-[#CFFF4D] rounded-lg"></div>
+    </div>
+
+    <div class="flex overflow-x-auto max-w-full lg:max-w-[600px] space-x-4 pb-4 pt-2" *ngIf="selectedFiles.length > 0">
+      <ng-container *ngFor="let file of selectedFiles; let i = index">
+        <div class="relative flex-shrink-0">
+          <div class="w-20 h-20 border border-[#03A981] rounded-lg flex items-center justify-center bg-[#26272b] overflow-hidden">
+            <ng-container *ngIf="file.file.type.startsWith('image/')">
+              <img [src]="file.preview" class="max-w-full max-h-full object-contain" [alt]="file.file.name">
+            </ng-container>
+            <ng-container *ngIf="!file.file.type.startsWith('image/')">
+              <span class="text-xs text-center p-1 text-[#CFFF4D]">
+                {{ file.file.name.includes('.') ? file.file.name.split('.').pop()?.toUpperCase() : 'SIN EXTENSIÓN' }}
+              </span>
+            </ng-container>
+          </div>
+          <button (click)="removeFile(i)" class="absolute -top-2 -right-2 bg-[#CFFF4D] text-[#111316] rounded-full p-1 flex items-center justify-center shadow-md hover:bg-[#03A981] hover:text-white transition duration-150 ease-in-out">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <button (click)="uploadFiles()" class="w-full bg-[#03A981] hover:bg-[#CFFF4D] hover:text-[#111316] text-white font-medium p-4 rounded-lg transition duration-300">
+    Subir Archivos
+  </button>
+</div>

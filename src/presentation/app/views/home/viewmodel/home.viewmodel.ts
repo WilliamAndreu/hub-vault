@@ -13,6 +13,7 @@ import { FilePreviewComponent } from "src/presentation/app/shared-components/fil
 import { LoaderService } from "src/core/services/loader.service";
 import { DirectoryStorageService } from "src/core/services/directory-storage.service";
 import { NoopScrollStrategy } from "@angular/cdk/overlay";
+import { AddFolderComponentComponent } from "src/presentation/app/shared-components/add-folder-component/add-folder-component.component";
 
 @Injectable()
 export class HomeViewModel {
@@ -52,18 +53,30 @@ export class HomeViewModel {
     });
   }
 
-  public deleteFile(file: ContentEntity) {
-    this.loaderService.showLoader();
-    this.deleteContentUseCase.execute({ path: file.path, sha: file.sha }).subscribe({
-      next: (content) => {
-        this.loadContentData(this.gitHubRouter.getCurrentPath());
-      },
-      error: (error) => {},
-    });
-  }
+public deleteFile(file: ContentEntity) {
+  this.loaderService.showLoader();
+  
+  this.deleteContentUseCase.execute({ path: file.path, sha: file.sha }).subscribe({
+    next: () => {
+      const isLastFile = this.contentData()?.length === 1;
+      
+      if (isLastFile) {
+        this.gitHubRouter.resetPathFromLastFolder();
+      }
+      
+      this.loadContentData(this.gitHubRouter.getCurrentPath());
+    },
+    error: (error) => {
+      this.handleError('Error deleting file',error);
+    },
+  });
+}
 
-  async initUploadContent(files: File[]) {
+
+  async initUploadContent(files: File[], newDirectoryName?: String) {
     this.loaderService.showLoader();
+    let path = this.gitHubRouter.getCurrentPath();
+    if(newDirectoryName) path = this.gitHubRouter.getCurrentPath() + "/" + newDirectoryName;
     
     try {
       // Iterar sobre cada archivo de manera secuencial
@@ -71,10 +84,11 @@ export class HomeViewModel {
         const base64Data = await this.convertFileToBase64(file);
         
         // Esperar a que termine la subida de cada archivo antes de continuar
+        console.log( this.gitHubRouter.getCurrentPath());
         await this.uploadContentUseCase
           .execute({
             fileBase64: base64Data as string,
-            path: this.gitHubRouter.getCurrentPath(),
+            path,
             fileName: file.name,
           })
           .toPromise(); // Convertir el observable a promesa
@@ -168,6 +182,15 @@ export class HomeViewModel {
   public openBottomSheet(content: ContentEntity) {
     this.bottomSheet.open(FilePreviewComponent, {
       data: content,
+    });
+  }
+
+
+  public openCreateFolderBottomSheet() {
+    const bottomSheetRef = this.bottomSheet.open(AddFolderComponentComponent);
+      // Suscribirse al resultado cuando el componente hijo emite datos
+    bottomSheetRef.instance.filesUploaded.subscribe((event: { directoryName: string, files: File[] }) => {
+      this.initUploadContent(event.files, event.directoryName);
     });
   }
 }

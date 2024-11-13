@@ -1,0 +1,27 @@
+::ng-deep .mat-bottom-sheet-container {
+    @apply bg-blackDark;
+    @apply rounded-lg;
+  }
+  
+  .mat-list-item {
+    @apply text-white;
+  }
+
+.preview-container {
+  min-height: 150px; /* Garantiza un espacio constante para la vista previa */
+  display: block; /* Asegura que el contenedor esté siempre debajo del título */
+}
+
+.empty-preview {
+  display: flex;
+  justify-content: start;
+}
+
+.placeholder {
+  background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+

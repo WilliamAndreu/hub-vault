@@ -79,4 +79,10 @@ export class GithubRouterService {
     const routesMapped = this.routes.map((route) => (route === "home" ? mainDirectory.directoryPath : route));
     return routesMapped.join("/");
   }
+  resetPathFromLastFolder() {
+  if (this.routes.length > 1) {
+    this.routes.pop();
+    this.routesSubject.next([...this.routes]); 
+  }
+  }
 }
